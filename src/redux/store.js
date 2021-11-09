@@ -1,9 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { createStore, combineReducers } from "redux";
+// import { createStore, combineReducers } from "redux";
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import {
-  persistStore,
-  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -11,9 +9,14 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
 import logger from "redux-logger";
-import contacts from "./reducer";
+import contacts from "./contacts/contacts-reducer";
+
+const myMiddleWare = (store) => (next) => (action) => {
+  console.log("Моя прослойка", action);
+
+  next(action);
+};
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -21,29 +24,20 @@ const middleware = [
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),
+  myMiddleWare,
   logger,
 ];
 
-const contactsPersistConfig = {
-  key: "contacts",
-  storage,
-  blacklist: ["filter"],
-};
-
 const store = configureStore({
   reducer: {
-    contacts: persistReducer(contactsPersistConfig, contacts),
+    contacts: contacts,
   },
   middleware,
   // указываем, что devtools нужны только при разработке
   devTools: process.env.NODE_ENV === "development",
 });
 
-const persistor = persistStore(store);
-
-export default { store, persistor };
-
-console.log(store);
+export default store;
 
 // Без toolkit
 // import { createStore, combineReducers } from "redux";

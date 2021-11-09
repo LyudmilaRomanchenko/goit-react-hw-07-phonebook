@@ -2,13 +2,14 @@
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import s from "./Filter.module.css";
-import actions from "../../redux/actions";
-import { getFilter } from "../../redux/selectors";
+import { changeFilter } from "../../redux/contacts/contacts-actions";
+// import { getFilter } from "../../redux/selectors";
+import { contactsSelectors } from "../../redux/contacts";
 
 function Filter() {
-  const value = useSelector(getFilter);
+  const value = useSelector(contactsSelectors.getFilter);
   const dispatch = useDispatch();
-  const onChange = (e) => dispatch(actions.changeFilter(e.currentTarget.value));
+  const onChange = (e) => dispatch(changeFilter(e.currentTarget.value));
 
   return (
     <label className={s.findLable}>

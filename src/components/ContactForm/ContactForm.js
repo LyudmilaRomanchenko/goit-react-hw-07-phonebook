@@ -2,14 +2,15 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import s from "./ContactForm.module.css";
 import PropTypes from "prop-types";
-import actions from "../../redux/actions";
-import { getContacts } from "../../redux/selectors";
+// import actions from "../../redux/contacts/contacts-actions";
+// import { getContacts } from "../../redux/contacts/contacts-selectors";
+import { contactsOperations, contactsSelectors } from "../../redux/contacts";
 
 function ContactForm() {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(contactsSelectors.getContacts);
   const dispatch = useDispatch();
   const addContact = (name, number) =>
-    dispatch(actions.addContact(name, number));
+    dispatch(contactsOperations.addContact(name, number));
 
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
