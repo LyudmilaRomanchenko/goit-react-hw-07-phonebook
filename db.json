@@ -1,19 +1,19 @@
 {
   "contacts": [
     {
-      "name": "hhhhh",
+      "name": "Luydmila",
+      "number": "555-55-55",
+      "id": 1
+    },
+    {
+      "name": "Eugeniy",
       "number": "555-55-55",
       "id": 2
     },
     {
-      "name": "ffff",
+      "name": "Ksenia",
       "number": "555-55-55",
-      "id": 5
-    },
-    {
-      "name": "fffffffffffff",
-      "number": "555-55-55",
-      "id": 6
+      "id": 3
     }
   ]
 }
